@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <!-- <bean id="dataSourceSqlite" class="org.apache.commons.dbcp.BasicDataSource"
+           destroy-method="close">
+         <property name="driverClassName">
+             <value>org.sqlite.JDBC</value>
+         </property>
+         <property name="url">
+             <value>jdbc:sqlite::resource:db/sqliteDb.dbsqliteDb.db</value>
+         </property>
+     </bean>
+    -->
+
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="url">
+            <value>jdbc:mysql://123.207.127.17:3306/test</value>
+        </property>
+        <property name="username">
+            <value>admin</value>
+        </property>
+        <property name="password">
+            <value>book123</value>
+        </property>
+    </bean>
+
+    <bean id="transactionManage"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <bean id="transactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager">
+            <ref bean="transactionManage"/>
+        </property>
+    </bean>
+
+    <bean id="transactionProxy" abstract="true"
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager">
+            <ref bean="transactionManage"/>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="add*">PROPAGATION_REQUIRED</prop>
+                <prop key="insert*">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="del*">PROPAGATION_REQUIRED</prop>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="batch*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation">
+            <value>classpath:sqlmap/sqlmap.xml</value>
+        </property>
+    </bean>
+
+    <bean id="sharedSqlMapClientDAO" abstract="true">
+        <property name="dataSource">
+            <ref bean="dataSource"/>
+        </property>
+        <property name="sqlMapClient">
+            <ref bean="sqlMapClient"/>
+        </property>
+    </bean>
+
+</beans>

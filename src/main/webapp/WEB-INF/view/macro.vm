@@ -1,0 +1,4 @@
+
+#macro(stringPrint $str)
+	$str
+#end

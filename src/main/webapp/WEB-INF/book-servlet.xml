@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:util="http://www.springframework.org/schema/util"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- 激活@Controller模式 -->
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+
+	<!-- 对包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 需要更改 -->
+	<context:component-scan base-package="com.manage.book" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+
+	<!-- 总错误处理 -->
+	<bean id="exceptionResolver"
+		  class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>forward:/error.html</value>
+		</property>
+		<property name="defaultStatusCode">
+			<value>500</value>
+		</property>
+		<property name="warnLogCategory">
+			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver
+			</value>
+		</property>
+	</bean>
+
+	<!-- VelocityConfigurer负责在Spring中设置Velocity引擎,resourceLoaderPath告诉Velocity到哪里寻找它的模板 -->
+	<bean id="velocityConfig"
+		  class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+
+		<!-- org.springframework.web.servlet.view.velocity.VelocityConfigurer -->
+		<property name="resourceLoaderPath" value="/WEB-INF/view" />
+
+		<!-- 控制velocity的编码格式,和velocity.properties 冲突，优先看这里 -->
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<bean id="velocityViewResolver"
+		  class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
+		<property name="exposeSessionAttributes">
+			<value>true</value>
+		</property><!-- 暴露request属性 -->
+		<property name="toolboxConfigLocation" value="/WEB-INF/velocity/tools.xml" /><!--
+			工具类注入 -->
+		<property name="layoutUrl" value="layout/default.vm" />
+		<!-- 控制请求的编码格式 -->
+		<property name="contentType"><value>text/html;charset=UTF-8</value></property>
+	</bean>
+
+	<!-- 使用prefix属性和suffix属性由视图的逻辑名构造出模板文件的路径.由于模板目录的路径已经通过VelocityConfigurer的resourceLoaderPath属性配置好了，因此这里不需要设置前缀 -->
+	<bean id="viewResolver"
+		  class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	</bean>
+
+</beans>

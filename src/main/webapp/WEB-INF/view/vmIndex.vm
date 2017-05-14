@@ -1,0 +1,63 @@
+#set($page_title="Layout Test")
+
+vm    asdfasdfasdfsdsd
+
+#foreach($i in $list)
+$i.kpiCode $i.value
+#end
+
+<hr/>
+#foreach($i in $pageList)
+$i.kpiCode $i.value
+#end
+
+
+#if(false)
+sdfasdf
+#end
+
+$name
+
+$numberTool.add("10","4")
+
+
+$math.add("10","4")
+
+$date
+
+$number.format("35")
+
+$sorter.sort([5,1,12,3])
+<hr/>
+
+#stringPrint($name)
+
+#macro(stringPrint2 $str)
+	$str
+#end
+
+#stringPrint2($name)
+
+<hr/>
+
+#SHTML("input: <table><tr><td>abc</table><script>alert(1);</script>  <span style='color:red'>SHTML</span><br/>")<br/><br/>
+#SXML("input:<element attribute='abc'/>")<br/><br/>
+#SJS("nput:<a>bc</a><script>alert(1);alert('\08')</script>")<br/><br/>
+
+#SPURETEXT("input:<a>bc</a><script></script>")<br/><br/>
+#SLITERAL("input:<a>bc</a><script></script>")<br/><br/>
+	
+#SURL("http://www.baidu.com <script>alert(1);</script>")
+<br/><br/><br/><br/>
+
+#set($name="yingpengfei")
+##include("vmIndex.vm")
+#parse("vmMacroIndex.vm")
+
+<br/><br/><br/><br/>
+$_html_title
+
+
+
+
+
