@@ -36,7 +36,7 @@ public class IndexController {
     @RequestMapping(value = "/index.htm", method = RequestMethod.GET)
     public ModelAndView index(ModelMap modelMap, String name) {
         modelMap.put("a", "hello");
-        projectDAO.queryByProject("万宝城");
+        projectDAO.queryByProject("万宝城"); 
         System.out.println(projectDAO.queryByProject("万宝城"));
         return new ModelAndView("templates/home/project/index.vm");
     }
