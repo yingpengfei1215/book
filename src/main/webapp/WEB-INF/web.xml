@@ -37,7 +37,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            WEB-INF/book-servlet.xml,classpath:spring/*/*.xml,classpath:spring/*.xml
+            WEB-INF/book-servlet.xml
         </param-value>
     </context-param>
 
