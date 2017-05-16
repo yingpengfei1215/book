@@ -3,9 +3,8 @@
  */
 package com.manage.book.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.manage.book.controller.base.BaseController;
-import com.manage.book.controller.form.WeixinTextForm;
+import com.manage.book.core.WechatProcess;
 import com.manage.book.dal.daointerface.ProjectDAO;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -23,8 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.security.DigestException;
 import java.util.HashMap;
 import java.util.List;
@@ -49,10 +51,8 @@ public class IndexController {
      */
     @RequestMapping(value = "/index.htm", method = RequestMethod.GET)
     public ModelAndView index(ModelMap modelMap, String name) {
-        modelMap.put("a", "hello");
-        projectDAO.queryByProject("万宝城");
-        System.out.println(projectDAO.queryByProject("万宝城"));
-        LOGGER.info("asdfasdfasdfasd");
+        modelMap.put("name", name);
+        LOGGER.info("hello" + name);
         return new ModelAndView("templates/home/project/index.vm");
     }
 
@@ -84,57 +84,43 @@ public class IndexController {
     public void vali(HttpServletRequest request, HttpServletResponse response) {
 
         try {
+            request.setCharacterEncoding("UTF-8");
+            response.setCharacterEncoding("UTF-8");
 
-            String params = JSONObject.toJSONString(request.getParameterMap());
-            Map<String, String> xmlMap = xmlToMap(request);
-            String xml = JSONObject.toJSONString(xmlMap);
+            /** 读取接收到的xml消息 */
+            StringBuffer sb = new StringBuffer();
+            InputStream is = request.getInputStream();
+            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+            String s = "";
+            while ((s = br.readLine()) != null) {
+                sb.append(s);
+            }
+            String xml = sb.toString(); //次即为接收到微信端发送过来的xml数据
 
-            System.out.println(",url:" + request.getRequestURL() + ",param:" + params + ",xml:" + xml);
-            LOGGER.info(",url:" + request.getRequestURL() + ",param:" + params + ",xml:" + xml);
-            BaseController.writeJsonStr(response, "form.toString()");
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-    }
-
-
-    /**
-     * xml转换为map
-     *
-     * @param request
-     * @return
-     * @throws IOException
-     */
-    @SuppressWarnings("unchecked")
-    public static Map<String, String> xmlToMap(HttpServletRequest request) throws IOException {
-        Map<String, String> map = new HashMap<String, String>();
-        SAXReader reader = new SAXReader();
-
-        InputStream ins = null;
-        try {
-            ins = request.getInputStream();
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-        Document doc = null;
-        try {
-            doc = reader.read(ins);
-            Element root = doc.getRootElement();
-
-            List<Element> list = root.elements();
-
-            for (Element e : list) {
-                map.put(e.getName(), e.getText());
+            String result = "";
+            /** 判断是否是微信接入激活验证，只有首次接入验证时才会收到echostr参数，此时需要把它直接返回 */
+            String echostr = request.getParameter("echostr");
+            if (echostr != null && echostr.length() > 1) {
+                result = echostr;
+            } else {
+                //正常的微信处理流程
+                result = new WechatProcess().processWechatMag(xml);
             }
 
-            return map;
-        } catch (DocumentException e1) {
-            e1.printStackTrace();
-        } finally {
-            ins.close();
-        }
+            try {
+                OutputStream os = response.getOutputStream();
+                os.write(result.getBytes("UTF-8"));
+                os.flush();
+                os.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-        return null;
+
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
     }
 
 }
