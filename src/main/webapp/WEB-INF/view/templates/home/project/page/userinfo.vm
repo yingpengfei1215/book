@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>微信JS-SDK Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="htdocs/css/style.css">
+  <link rel="stylesheet" type="text/css" href="htdocs/css/bootstrap/bootstrap.min.css">
+  <script type="text/javascript" href="htdocs/js/bootstrap.min.js"></script>
+</head>
+    <body ontouchstart="">
+        <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+
+                    <table class="table table-bordered table-striped">
+                          <tbody>
+                            <tr>
+                              <th><label> 姓名</label></th>
+                              <th><input type="text" class="form-control" id="userName" placeholder="请输入名称"></th>
+                              <th><label> 联系电话</label></th>
+                              <th><input type="text" class="form-control" id="phoneNo" placeholder="请输入手机号" value="$userinfo.phoneNo"> </th>
+                             </tr>
+                             <tr>
+                              <th><label> 邮箱地址</label></th>
+                              <th><input type="text" class="form-control" id="userEmail" placeholder="请输入手机号"></th>
+                              <th><label> 性别</label></th>
+                              <th>
+                              	<select class="form-control">
+								  <option value="0">男</option>
+								  <option value="1">女</option>
+								</select>
+								</th>
+                             </tr>
+                              <tr>
+                              <th rowspan="2"><label> 快递地址</label></th>
+                              <th  colspan="3">
+                              	<select class="form-control">
+                              	  <option value="0">省</option>
+								  <option value="0">男</option>
+								  <option value="1">女</option>
+								</select>
+                              	<select class="form-control">
+								  <option value="0">市</option>
+								  <option value="1">女</option>
+								</select>
+                              	<select class="form-control">
+								  <option value="0">区</option>
+								  <option value="1">女</option>
+								</select>
+                              </th>
+                             </tr>
+                             <tr>
+                              <th colspan="3">
+                              <input type="text" id="inputHelpBlock" class="form-control" aria-describedby="helpBlock" value="$userinfo.address">
+                              </th>
+                             </tr>
+                             <tr>
+                              <th><label>兴趣书籍</label></th>
+                              <th colspan="3">
+
+                              	<ul>
+                              		<li>小说</li>
+                              		<li>文学</li>
+                              		<li>言情</li>
+                              		<li>惊悚</li>
+                              		<li>科幻</li>	
+                              	</ul>
+
+                              </th>
+                             </tr>
+                          </tbody>
+                     </table>
+
+              </div>
+            </div>
+
+        </div>
+    </body>
+</html>
+
+$userinfo.id</br>
+
+$userinfo.openid</br>
+$userinfo.phoneNo</br>
+$userinfo.sex</br>
+$userinfo.address</br>
+$userinfo.preferenceType</br>
+
+
+
+
+
+

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- 参考文档http://generator.sturgeon.mopaas.com/configreference/table.html -->
+<generatorConfiguration>
+
+    <properties resource="mybatisGenerator/generatorConfig.properties"></properties>
+    <context id="book" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <commentGenerator>
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="${jdbc.driverClass}" connectionURL="${book.jdbc.connectionURL}"
+                        userId="${book.jdbc.userId}"
+                        password="${book.jdbc.password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="${book.package.do}" targetProject="src/main/java">
+            <property name="constructorBased" value="true"/>
+            <property name="enableSubPackages" value="false"/>
+            <property name="immutable" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${book.package.mapper}" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="${book.package.dao}" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="false"/>
+            <property name="exampleMethodVisibility" value="false"/>
+            <property name="methodNameCalculator" value="default"/>
+            <property name="rootInterface" value=""/>
+        </javaClientGenerator>
+
+        <!--book tables-->
+        <table tableName="book_info" domainObjectName="BookInfoDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.BookInfoDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+        <table tableName="address_info" domainObjectName="AddressInfoDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.AddressInfoDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+        <table tableName="app_area" domainObjectName="AppAreaDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.AppAreaDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+        <table tableName="book_type" domainObjectName="BookTypeDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.BookTypeDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+        <table tableName="user_borrow_info" domainObjectName="UserBorrowInfoDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.UserBorrowInfoDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+        <table tableName="user_car" domainObjectName="UserCarDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.UserCarDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+        <table tableName="user_info" domainObjectName="UserInfoDO">
+            <property name="rootInterface" value="${book.package.dao}.extend.UserInfoDOMapperBase"/>
+            <generatedKey column="id" sqlStatement="SELECT LAST_INSERT_ID()" identity="true" type="post"/>
+        </table>
+
+
+    </context>
+
+</generatorConfiguration>

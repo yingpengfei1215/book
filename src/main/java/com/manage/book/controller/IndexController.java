@@ -5,14 +5,8 @@ package com.manage.book.controller;
 
 import com.manage.book.controller.base.BaseController;
 import com.manage.book.core.WechatProcess;
-import com.manage.book.dal.daointerface.ProjectDAO;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +23,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.security.DigestException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,9 +33,6 @@ import java.util.Map;
 public class IndexController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexController.class);
-
-    @Autowired
-    ProjectDAO projectDAO;
 
     /**
      * @param modelMap
@@ -84,6 +74,7 @@ public class IndexController {
     public void vali(HttpServletRequest request, HttpServletResponse response) {
 
         try {
+
             request.setCharacterEncoding("UTF-8");
             response.setCharacterEncoding("UTF-8");
 

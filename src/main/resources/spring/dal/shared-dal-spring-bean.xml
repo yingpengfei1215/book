@@ -1,15 +1,30 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-         http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sofa="http://schema.alipay.com/sofa/schema/slite"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://schema.alipay.com/sofa/schema/slite http://schema.alipay.com/sofa/slite.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
        default-autowire="byName">
+
+    <!-- auto inject spring bean -->
+    <context:component-scan base-package="com.manage.book" />
+    <context:annotation-config></context:annotation-config>
+
+
     <!-- ======================================================================== -->
     <!-- DAO configs: auto generate by dalgen -->
     <!-- ======================================================================== -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath*:com/manage/book/dal/mapper/*.xml" />
+    </bean>
 
-    <bean id="projectDAO" class="com.manage.book.dal.ibatis.IbatisProjectDAO" parent="sharedSqlMapClientDAO"/>
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.manage.book.dal.daointerface" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
 
 
 </beans>
