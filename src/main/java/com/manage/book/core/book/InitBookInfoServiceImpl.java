@@ -28,7 +28,6 @@ public class InitBookInfoServiceImpl implements InitBookInfoService {
 
     @Override
     public BookInfoModel initBookInfo(String code) {
-        code = "978-7-121-14865-1";
         if (StringUtil.isBlank(code)) {
             return null;
         }

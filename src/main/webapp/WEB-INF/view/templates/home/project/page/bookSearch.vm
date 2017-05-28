@@ -1,0 +1,6 @@
+ $!key
+#foreach($book in $booklist)
+
+   $book.bookTitile<br/>
+   $book.pic
+#end

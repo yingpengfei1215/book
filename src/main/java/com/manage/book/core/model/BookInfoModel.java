@@ -26,6 +26,9 @@ public class BookInfoModel implements Serializable {
     @JSONField(name = "summary")
     private String bookComment;
 
+    @JSONField(name = "title")
+    private String bookTitile;
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("BookInfoModel{");
@@ -35,8 +38,27 @@ public class BookInfoModel implements Serializable {
         sb.append(", publishers='").append(publishers).append('\'');
         sb.append(", pic='").append(pic).append('\'');
         sb.append(", bookComment='").append(bookComment).append('\'');
+        sb.append(", bookTitile='").append(bookTitile).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    /**
+     * Getter method for property <tt>bookTitile</tt>.
+     *
+     * @return property value of bookTitile
+     */
+    public String getBookTitile() {
+        return bookTitile;
+    }
+
+    /**
+     * Setter method for property <tt>bookTitile</tt>.
+     *
+     * @param bookTitile value to be assigned to property bookTitile
+     */
+    public void setBookTitile(String bookTitile) {
+        this.bookTitile = bookTitile;
     }
 
     /**
