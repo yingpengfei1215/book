@@ -49,7 +49,7 @@
       #{bookStatus,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{bookType,jdbcType=VARCHAR}, 
       #{publishers,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, 
       #{bookComment,jdbcType=VARCHAR}, #{deposit,jdbcType=INTEGER}, #{cost,jdbcType=INTEGER}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP})
+      now(),now())
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.manage.book.dal.dataobject.BookInfoDO">
     <!--

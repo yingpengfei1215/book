@@ -8,11 +8,11 @@
        default-autowire="byName">
 
     <!-- auto inject spring bean -->
-    <context:component-scan base-package="com.manage.book" />
+    <context:component-scan base-package="com.manage.book"/>
     <context:annotation-config></context:annotation-config>
-    <import resource="classpath*:spring/dal/*-bean.xml" />
+    <import resource="classpath*:spring/dal/*-bean.xml"/>
 
-
+    <bean id="InitBookInfoService" class="com.manage.book.core.book.InitBookInfoServiceImpl"/>
 
 
 </beans>

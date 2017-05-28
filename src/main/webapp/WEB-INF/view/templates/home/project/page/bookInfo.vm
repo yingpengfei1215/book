@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>图书详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="htdocs/css/style.css">
+  <link rel="stylesheet" type="text/css" href="htdocs/css/bootstrap/bootstrap.min.css">
+  <script type="text/javascript" href="htdocs/js/bootstrap.min.js"></script>
+</head>
+    <body ontouchstart="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                  <img src="$!model.pic" />
+                </div>
+                <div class="col-md-8">
+                    <ul>
+                      <li>
+                        <label>isbn</label>
+                        <label>$!model.isbn</label>
+                      </li>
+                      <li>
+                        <label>作者</label>
+                        <label>$!model.author</label>
+                      </li>
+                      <li>
+                        <label>出版社</label>
+                        <label>$!model.publishers</label>
+                      </li>
+                      <li>
+                         <label>邻书编号</label>
+                        <label></label>
+                      </li>
+                      <li>
+                         <label>持有人</label>
+                        <label></label>
+                      </li>
+                      <li>
+                         <label>借阅费</label>
+                        <label></label>
+                      </li>
+                      <li>
+                         <label>押金</label>
+                        <label></label>
+                      </li>
+                      <li>
+                         <label>可漂流</label>
+                        <label>可售</label>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <ul>
+                    <li>图书简介</li>
+                    <li>$!model.bookComment</li>
+                    <li>书评</li>
+                    <li>图书简介</li>
+                  </ul>
+
+
+               </div>
+            </div>
+        </div>
+ </body>
+</html>
