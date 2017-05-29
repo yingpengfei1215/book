@@ -56,13 +56,13 @@
       book_status, author, book_type, 
       publishers, pic, brief, 
       book_comment, deposit, cost, 
-      gmt_modified, gmt_create, book_titile
+      gmt_modified,  book_titile
       )
     values (#{isbn,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, #{borrowerId,jdbcType=INTEGER}, 
       #{bookStatus,jdbcType=INTEGER}, #{author,jdbcType=VARCHAR}, #{bookType,jdbcType=VARCHAR}, 
       #{publishers,jdbcType=VARCHAR}, #{pic,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, 
-      #{bookComment,jdbcType=VARCHAR}, #{deposit,jdbcType=INTEGER}, #{cost,jdbcType=INTEGER}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{bookTitile,jdbcType=VARCHAR}
+      #{bookComment,jdbcType=VARCHAR}, #{deposit,jdbcType=INTEGER}, #{cost,jdbcType=INTEGER},
+    now(), #{bookTitile,jdbcType=VARCHAR}
       )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.manage.book.dal.dataobject.BookInfoDO">
@@ -83,8 +83,8 @@
       book_comment = #{bookComment,jdbcType=VARCHAR},
       deposit = #{deposit,jdbcType=INTEGER},
       cost = #{cost,jdbcType=INTEGER},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = now(),
+      gmt_create = now(),
       book_titile = #{bookTitile,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
