@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>我的图书</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="/htdocs/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap-theme.min.css">
+  <script type="text/javascript" href="/htdocs/js/bootstrap.min.js"></script>
+</head>
+    <body ontouchstart="">
+        <div class="container">
+            <div class="row">
+                <ul>
+                <li>
+                   <div>
+                     <div>+</div>
+                   </div>
+                 </li>
+                 #foreach($book in $booklist)
+                     <li>
+                       <div>
+                         <div><img src="$book.pic"></div>
+                         <div> $book.bookTitile</div>
+                       </div>
+                     </li>
+                  #end
+                  </ul>
+            </div>
+
+             
+
+        </div>
+ </body>
+</html>

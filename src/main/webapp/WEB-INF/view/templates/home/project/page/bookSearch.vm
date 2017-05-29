@@ -1,6 +1,42 @@
- $!key
-#foreach($book in $booklist)
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>图书详情</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+  <link rel="stylesheet" href="/htdocs/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap-theme.min.css">
+  <script type="text/javascript" href="/htdocs/js/bootstrap.min.js"></script>
+</head>
+    <body ontouchstart="">
+        <div class="container">
+            <div class="row">
+                 <div class="input-group book-search">
+                  <input type="text" class="form-control" placeholder="输入书名、作者、类别" value="$!key" >
+                  <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">搜索</button>
+                  </span>
+                </div>
+            </div>
 
-   $book.bookTitile<br/>
-   $book.pic
-#end
+            <div class="row books-list">
+                <ul class="books-ul">
+                 #foreach($book in $booklist)
+                     <li class="books-li">
+                       <div class="img-wrap">
+                         <div class="img-container">
+                           <img src="$book.pic">
+                         </div>
+                         <div class="book-text"><nobr>$book.bookTitile</nobr></div>
+                       </div>
+                     </li>
+                  #end
+                  </ul>
+            </div>
+
+             
+
+        </div>
+ </body>
+</html>

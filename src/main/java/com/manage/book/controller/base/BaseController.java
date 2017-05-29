@@ -16,6 +16,9 @@ import java.io.PrintWriter;
  */
 public class BaseController {
 
+    public int pageAdd(int page) {
+        return page + 6;
+    }
 
 //    /**
 //     * 写json到前台

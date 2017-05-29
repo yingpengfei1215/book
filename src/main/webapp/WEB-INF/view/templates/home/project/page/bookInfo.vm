@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <title>图书详情</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <link rel="stylesheet" href="htdocs/css/style.css">
-  <link rel="stylesheet" type="text/css" href="htdocs/css/bootstrap/bootstrap.min.css">
-  <script type="text/javascript" href="htdocs/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/htdocs/css/style.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
+  <script type="text/javascript" href="/htdocs/js/bootstrap.min.js"></script>
 </head>
     <body ontouchstart="">
         <div class="container">
