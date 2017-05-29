@@ -108,6 +108,15 @@
     from book_info
   </select>
 
+  <select id="checkBookIn" resultMap="BaseResultMap" >
+    select id, pic, book_titile
+    from book_info
+    where
+    owner_id  = #{ownerId,jdbcType=INTEGER}
+    and isbn  = #{isbn,jdbcType=VARCHAR}
+  </select>
+
+
   <select id="selectByKey" resultMap="BaseResultMapSearch" >
     select id, pic, book_titile
     from book_info

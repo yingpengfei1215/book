@@ -8,6 +8,9 @@ import java.util.List;
 
 public interface BookInfoDOMapperBase {
 
+    BookInfoDO checkBookIn(@Param("ownerId") int ownerId, @Param("isbn") String isbn);
+
+
     List<BookInfoDO> selectByKey(@Param("key") String key, @Param("start") int start, @Param("end") int end);
 
     List<BookInfoDO> selectByType(@Param("typeId") String typeId, @Param("start") int start, @Param("end") int end);

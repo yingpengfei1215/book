@@ -15,16 +15,28 @@ import com.manage.book.dal.dataobject.BookInfoDO;
 public interface InitBookInfoService {
 
     /**
+     * 初始化书籍信息
+     *
      * @param code
+     * @return
+     */
+    public BookInfoModel initBookInfo(String code, int ownerId);
+
+    /**
+     * 豆瓣上读取书籍信息
+     *
+     * @param code
+     * @return
+     */
+    public BookInfoModel readBookIsbn(String code);
+
+    /**
+     * 数据库中获取书本信息
+     *
+     * @param id
      * @return
      */
     public BookInfoDO getBookInfo(String id);
-
-    /**
-     * @param code
-     * @return
-     */
-    public BookInfoModel initBookInfo(String code);
 
 
 }

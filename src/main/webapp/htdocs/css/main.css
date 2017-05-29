@@ -48,7 +48,7 @@ button {
 }
 
 /* 创建一个正方形容器 */
-.books-li .img-container{
+.books-li .img-container,.bookinfo-img .img-container{
    width: 100%;
    height: 0px;
    padding-bottom: 123%;
@@ -58,13 +58,13 @@ button {
 }
 
 /* 采用绝对定位 */
-.books-li .img-wrap img{
+.books-li .img-wrap img,.bookinfo-img .img-wrap img{
     position:absolute;
     width: 100%;
     height: 100%;
 }
 
-.books-li .book-text{
+.books-li .book-text,.bookinfo-img .book-text{
     text-align: center;
     text-overflow: ellipsis;
     overflow: hidden;

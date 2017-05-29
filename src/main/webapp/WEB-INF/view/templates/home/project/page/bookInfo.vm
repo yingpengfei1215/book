@@ -4,16 +4,20 @@
   <meta charset="utf-8">
   <title>图书详情</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <link rel="stylesheet" href="/htdocs/css/style.css">
+ <link rel="stylesheet" href="/htdocs/css/main.css">
   <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
   <script type="text/javascript" href="/htdocs/js/bootstrap.min.js"></script>
 </head>
     <body ontouchstart="">
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                  <img src="$!model.pic" />
-                  $!model.bookTitle
+                <div class="col-md-4 bookinfo-img">
+                     <div class="img-wrap">
+                         <div class="img-container">
+                           <img src="$model.pic">
+                         </div>
+                         <div class="book-text"><nobr>$model.bookTitile</nobr></div>
+                       </div>
                 </div>
                 <div class="col-md-8">
                     <ul>

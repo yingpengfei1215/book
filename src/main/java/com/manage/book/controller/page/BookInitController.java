@@ -38,7 +38,7 @@ public class BookInitController {
      */
     @RequestMapping(value = "/bookInit.htm", method = RequestMethod.GET)
     public ModelAndView init(ModelMap modelMap, String code) {
-        BookInfoModel model = initBookInfoService.initBookInfo(code);
+        BookInfoModel model = initBookInfoService.initBookInfo(code, 123);
         modelMap.put("model", model);
         return new ModelAndView("templates/home/project/page/bookInfo.vm");
     }
