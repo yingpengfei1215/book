@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author pengfei.ypf
@@ -47,6 +50,21 @@ public class BookSearchController extends BaseController {
 
     /**
      * @param modelMap
+     * @param key
+     * @return
+     */
+    @RequestMapping(value = "/bookSearch.json", method = RequestMethod.GET)
+    public void bookSearchJson(HttpServletResponse response, ModelMap modelMap, String key, String page) {
+        Map<String, Object> re = new HashMap<String, Object>();
+        re.put("key", key);
+        int pageI = DataTypeHandleUtil.parseInt(page);
+        List<BookInfoDO> booklist = bookInfoDOMapper.selectByKey(key, pageI, pageAdd(pageI));
+        re.put("booklist", booklist);
+        writeJson(response, re);
+    }
+
+    /**
+     * @param modelMap
      * @return
      */
     @RequestMapping(value = "/bookSearchByType.htm", method = RequestMethod.GET)
@@ -59,5 +77,17 @@ public class BookSearchController extends BaseController {
         modelMap.put("booklist", booklist);
         return new ModelAndView("templates/home/project/page/bookSearch.vm");
     }
+
+//    /**
+//     * @param modelMap
+//     * @return
+//     */
+//    @RequestMapping(value = "/typeList.htm", method = RequestMethod.GET)
+//    public ModelAndView getTypeList(ModelMap modelMap) {
+//        int pageI = DataTypeHandleUtil.parseInt(page);
+//        List<BookInfoDO> booklist = bookInfoDOMapper.selectByKey(typeId, pageI, pageAdd(pageI));
+//        modelMap.put("booklist", booklist);
+//        return new ModelAndView("templates/home/project/page/bookSearch.vm");
+//    }
 
 }
