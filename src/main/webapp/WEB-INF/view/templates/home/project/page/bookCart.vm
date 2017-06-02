@@ -2,24 +2,19 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>我的图书</title>
+  <title>购物车</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-    <link rel="stylesheet" href="/htdocs/css/main.css">
-    <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap-theme.min.css">
-    <script type="text/javascript" src="/htdocs/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/htdocs/js/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="/htdocs/js/bookSearch.js"></script>
+  <link rel="stylesheet" href="/htdocs/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap-theme.min.css">
+  <script type="text/javascript" src="/htdocs/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/htdocs/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="/htdocs/js/bookSearch.js"></script>
 </head>
     <body ontouchstart="">
         <div class="container">
-            <div class="row books-list">
+           <div class="row books-list">
                <ul class="books-ul">
-                   <li class="books-li" >
-                     <div class="img-wrap">
-                      <div class="book-text">+</div>
-                     </div>
-                   </li>
                 #foreach($book in $booklist)
                     <li class="books-li J-books-li" data-value="$book.id">
                       <div class="img-wrap">
@@ -34,4 +29,5 @@
            </div>
         </div>
  </body>
+
 </html>

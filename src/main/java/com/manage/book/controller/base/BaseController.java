@@ -19,6 +19,13 @@ import java.io.PrintWriter;
  */
 public class BaseController {
 
+
+    private static int USERID = 123;
+
+    public static int getUserId() {
+        return USERID;
+    }
+
     public int pageAdd(int page) {
         return page + 6;
     }

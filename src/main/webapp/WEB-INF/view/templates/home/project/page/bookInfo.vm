@@ -4,9 +4,12 @@
   <meta charset="utf-8">
   <title>图书详情</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
- <link rel="stylesheet" href="/htdocs/css/main.css">
+<link rel="stylesheet" href="/htdocs/css/main.css">
   <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap-theme.min.css">
   <script type="text/javascript" src="/htdocs/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/htdocs/js/jquery-1.9.1.min.js"></script>
+
 </head>
     <body ontouchstart="">
         <div class="container">
@@ -64,10 +67,40 @@
                     <li>书评</li>
                     <li>图书简介</li>
                   </ul>
-
-
                </div>
+            </div>
+            <div class="row">
+               <span class="input-group-btn">
+                  #if(!$cartDo)
+                    <button class="btn btn-default" type="button" id="borrow-book" value="$model.id"  >求借</button>
+                  #else
+                    <button class="btn btn-default" type="button" id="borrow-book">已在购物车中</button>
+                  #end
+                </span>
             </div>
         </div>
  </body>
+ <script type="text/javascript">
+  $(document).ready(function(){
+      // 点击求借
+    $("#borrow-book").click(function(data){
+
+      if(!$(this).val()){
+       location.href = "/bookCart.htm"
+       retrun;
+      }
+
+      var dataV = {"bookId":$(this).val()};
+        jQuery.post("/addbookCart.json",dataV,function(data,status){
+          if(data.result ="S"){
+              location.href = "/bookCart.htm"
+          }
+      });
+
+    });
+
+  })
+
+
+ </script>
 </html>

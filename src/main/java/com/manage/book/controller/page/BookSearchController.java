@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,15 +68,37 @@ public class BookSearchController extends BaseController {
      * @param modelMap
      * @return
      */
-    @RequestMapping(value = "/bookSearchByType.htm", method = RequestMethod.GET)
-    public ModelAndView bookSearchByType(ModelMap modelMap, String typeId, String page) {
+    @RequestMapping(value = "/bookTypes.json", method = RequestMethod.GET)
+    public void bookTypes(HttpServletResponse response, ModelMap modelMap, String typeId, String page) {
         if (StringUtil.isBlank(typeId)) {
             typeId = "1";
         }
         int pageI = DataTypeHandleUtil.parseInt(page);
-        List<BookInfoDO> booklist = bookInfoDOMapper.selectByKey(typeId, pageI, pageAdd(pageI));
+        // List<BookInfoDO> booklist = bookInfoDOMapper.selectByKey(typeId, pageI, pageAdd(pageI));
+        List<String> typelist = new ArrayList<String>();
+        typelist.add("漫画");
+        typelist.add("动漫");
+        typelist.add("美食");
+        typelist.add("科技");
+
+        modelMap.put("typelist", typelist);
+        writeJson(response, modelMap);
+    }
+
+    /**
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value = "/bookSearchByType.json", method = RequestMethod.GET)
+    public void bookSearchByType(HttpServletResponse response, ModelMap modelMap, String typeId, String page) {
+        if (StringUtil.isBlank(typeId)) {
+            typeId = "1";
+        }
+
+        int pageI = DataTypeHandleUtil.parseInt(page);
+        List<BookInfoDO> booklist = bookInfoDOMapper.selectByType(typeId, pageI, pageAdd(pageI));
         modelMap.put("booklist", booklist);
-        return new ModelAndView("templates/home/project/page/bookSearch.vm");
+        writeJson(response, modelMap);
     }
 
 //    /**

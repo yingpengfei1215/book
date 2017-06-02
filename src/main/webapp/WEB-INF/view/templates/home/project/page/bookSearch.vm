@@ -23,15 +23,16 @@
             </div>
 
             <div class="row">
-                  <div class="col-md-6 search-tab select-tab">新书</div>
-                  <div class="col-md-6 search-tab search-tab-left">分类</div>
+                  <div class="col-md-6 search-tab select-tab" id="new-books">新书</div>
+                  <div class="col-md-6 search-tab search-tab-left" id="type-books">分类</div>
             </div>
 
             <div class="row books-list">
                 <ul class="books-ul" id="books-ul">
-                
+
                   </ul>
             </div>
         </div>
  </body>
+
 </html>

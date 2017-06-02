@@ -150,7 +150,6 @@
     limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
   </select>
 
-
   <select id="selectMyBorrower" resultMap="BaseResultMapSearch" >
     select id, pic, book_titile
     from book_info
@@ -158,6 +157,17 @@
     borrower_id  = #{borrowerId,jdbcType=INTEGER}
     order by gmt_create desc
     limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectCartByUser" resultMap="BaseResultMapSearch" >
+    <![CDATA[
+     select b.id as id, b.pic as pic, b.book_titile as book_titile
+    from book_info b
+    JOIN user_car c on c.book_id = b.id
+    where c.user_id = #{userId,jdbcType=INTEGER}
+    order by c.gmt_create desc
+    limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+     ]]>
   </select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.manage.book.dal.daointerface.extend;
 
 import com.manage.book.dal.dataobject.BookInfoDO;
+import com.manage.book.dal.dataobject.UserCarDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,5 +20,6 @@ public interface BookInfoDOMapperBase {
 
     List<BookInfoDO> selectMyBorrower(@Param("borrowerId") String borrowerId, @Param("start") int start, @Param("end") int end);
 
+    List<BookInfoDO> selectCartByUser(@Param("userId")int userId, @Param("start") int start, @Param("end") int end);
 
 }
