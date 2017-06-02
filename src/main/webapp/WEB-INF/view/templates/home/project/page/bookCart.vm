@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <title>购物车</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
-  <link rel="stylesheet" href="/htdocs/css/main.css">
-  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/htdocs/css/bootstrap/bootstrap-theme.min.css">
-  <script type="text/javascript" src="/htdocs/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/htdocs/js/jquery-1.9.1.min.js"></script>
-  <script type="text/javascript" src="/htdocs/js/bookSearch.js"></script>
+  <link rel="stylesheet" href="htdocs/css/main.css">
+  <link rel="stylesheet" type="text/css" href="htdocs/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="htdocs/css/bootstrap/bootstrap-theme.min.css">
+  <script type="text/javascript" src="htdocs/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="htdocs/js/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="htdocs/js/bookSearch.js"></script>
 </head>
     <body ontouchstart="">
         <div class="container">
