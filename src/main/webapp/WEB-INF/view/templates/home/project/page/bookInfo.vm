@@ -87,12 +87,12 @@
     $("#borrow-book").click(function(data){
 
       if(!$(this).val()){
-       location.href = "/bookCart.htm"
+       location.href = "bookCart.htm"
        retrun;
       }
 
       var dataV = {"bookId":$(this).val()};
-        jQuery.post("/addbookCart.json",dataV,function(data,status){
+        jQuery.post("addbookCart.json",dataV,function(data,status){
           if(data.result ="S"){
               location.href = "/bookCart.htm"
           }

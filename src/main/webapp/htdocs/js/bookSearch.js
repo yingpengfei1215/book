@@ -13,12 +13,12 @@ $(document).ready(function(){
   	var bindInfo =function(){
   		$(".J-books-li").on("click",function(data){
 	  			that = this;
-				location.href = "/bookInfo.htm?id="+$(that).attr("data-value")
+				location.href = "bookInfo.htm?id="+$(that).attr("data-value")
 			});  
   	}
 
 	var showBooks = function(key){
-  		$.get("/bookSearch.json?key="+key,function(data,status){
+  		$.get("bookSearch.json?key="+key,function(data,status){
 		   	var list = data.booklist;
 	  		var lis = getBookList(list);
 	  		$("#books-ul").html(lis);
@@ -27,7 +27,7 @@ $(document).ready(function(){
   	}
 
   	var showTypes = function(){
-		$.get("/bookTypes.json",function(data,status){
+		$.get("bookTypes.json",function(data,status){
 		    var lis ="";
 		   	var list = data.typelist;
 	  		for (var i = 0; i < list.length; i++) {
@@ -47,7 +47,7 @@ $(document).ready(function(){
   	}
 
   	var searchBookByTypes = function(type){
-		$.get("/bookSearchByType.json?type="+type,function(data,status){
+		$.get("bookSearchByType.json?type="+type,function(data,status){
 			$("#search-key").html("");
 		   	var list = data.booklist;
 	  		var lis = getBookList(list);
