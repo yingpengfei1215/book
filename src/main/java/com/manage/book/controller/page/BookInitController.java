@@ -4,11 +4,14 @@
 package com.manage.book.controller.page;
 
 import com.manage.book.controller.base.BaseController;
+import com.manage.book.controller.form.BookInfoForm;
 import com.manage.book.core.book.InitBookInfoService;
 import com.manage.book.core.model.BookInfoModel;
+import com.manage.book.dal.daointerface.BookInfoDOMapper;
 import com.manage.book.dal.daointerface.UserCarDOMapper;
 import com.manage.book.dal.dataobject.BookInfoDO;
 import com.manage.book.dal.dataobject.UserCarDO;
+import com.manage.book.util.BeanCovertUtil;
 import com.manage.book.util.string.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,6 +41,8 @@ public class BookInitController {
     @Autowired
     public UserCarDOMapper userCarDOMapper;
 
+    @Autowired
+    public BookInfoDOMapper bookInfoDOMapper;
 
     /**
      * @param modelMap
@@ -70,5 +75,27 @@ public class BookInitController {
         modelMap.put("model", bookInfo);
         return new ModelAndView("templates/home/project/page/bookInfo.vm");
     }
+
+    /**
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value = "/bookInfoEdit.htm", method = RequestMethod.GET)
+    public ModelAndView bookInfoEdit(ModelMap modelMap, String id) {
+        // bookInfoDOMapper.updateByPrimaryKey(BeanCovertUtil.beanCovert(form,BookInfoDO.class));
+        if (StringUtil.isBlank(id)) {
+            modelMap.put("errorMsg", "参数错误");
+            return new ModelAndView("templates/home/project/error.vm");
+        }
+
+        BookInfoDO bookInfo = initBookInfoService.getBookInfo(id);
+        UserCarDO cartDo = userCarDOMapper.selectBookByUserAndId(BaseController.getUserId(), Integer.parseInt(id));
+        if (cartDo != null) {
+            modelMap.put("cartDo", "true");
+        }
+        modelMap.put("model", bookInfo);
+        return new ModelAndView("templates/home/project/page/bookInfoEdit.vm");
+    }
+
 
 }

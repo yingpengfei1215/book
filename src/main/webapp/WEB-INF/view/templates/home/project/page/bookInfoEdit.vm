@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>图书详情</title>
+  <title>图书编辑</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
   <link rel="stylesheet" href="htdocs/css/main.css">
@@ -47,11 +47,11 @@
                       </li>
                       <li>
                         <label>借阅费</label>
-                        <label><nobr>$!{model.cost}元</nobr></label>
+                        <label><nobr><input type="text" class="form-control" name="cost" placeholder="借阅费"  value="$!userinfo.userName" >元</nobr></label>
                       </li>
                       <li>
                          <label>押金</label>
-                        <label><nobr>$!{model.deposit}元</nobr></label>
+                        <label><nobr><input type="text" class="form-control" name="deposit" placeholder="押金"  value="$!userinfo.userName" >元</nobr></label>
                       </li>
                       <li>
                          <label>
@@ -76,12 +76,8 @@
             </div>
             <div class="row">
                <span class="input-group-btn">
-                  #if(!$cartDo)
-                    <button class="btn btn-default" type="button" id="borrow-book" value="$model.id"  >求借</button>
-                  #else
-                    <button class="btn btn-default" type="button" id="borrow-book">已在购物车中</button>
-                  #end
-                </span>
+                    <button class="btn btn-default" type="button" id="editBookInfo">提交</button>
+               </span>
             </div>
         </div>
  </body>
@@ -103,6 +99,35 @@
       });
 
     });
+
+     // 点击保存
+           $("#editBookInfo").on("click",function(data){
+
+             var form = $("form").serialize();
+             console.info(form);
+             $("#j-preference");
+             //form.preferences="1,2";
+
+             jQuery.ajax({
+                      url:"save_userinfo2.json",
+                      type:"post",
+                      dataType:"json",
+                      data:form,
+                      success:function(result){
+                        //result是服务器返回的json结果
+                        if(result.status){
+                           alert(result.success);
+                        }else {
+                           alert(result.success);
+                        }
+                        location.href="http://localhost:8080/userInfo.htm?type=read&id=$!userinfo.id"
+                      },
+                      error:function(){
+                          alert("发生异常，请重试！");
+                      }
+                   });
+
+            });
 
   })
 

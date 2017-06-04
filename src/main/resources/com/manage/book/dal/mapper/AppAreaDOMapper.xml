@@ -77,4 +77,33 @@
     gmt_modified, gmt_create
     from app_area
   </select>
+  
+  
+  
+  
+  
+    <select id="getAppArea" resultMap="BaseResultMap">
+    select v_code, v_pareacode, v_name, n_level, v_upcode, v_status, name_initials, isHot, 
+    gmt_modified, gmt_create
+    from app_area
+    where 1=1
+     <if test="vCode !=null ">  
+     and v_code = #{vCode,jdbcType=VARCHAR}
+     </if>
+      <if test="vPareacode !=null "> 
+      and v_pareacode = #{vPareacode,jdbcType=VARCHAR}
+    </if>
+     <if test="vName !=null "> 
+     and v_name = #{vName,jdbcType=VARCHAR}
+      </if>
+     <if test="nLevel !=null "> 
+      and n_level = #{nLevel,jdbcType=VARCHAR}
+      </if>
+     <if test="vUpcode !=null "> 
+      and v_upcode = #{vUpcode,jdbcType=VARCHAR}
+      </if>
+     <if test="vStatus !=null "> 
+      and v_status = #{vStatus,jdbcType=VARCHAR}
+      </if>
+  </select>
 </mapper>

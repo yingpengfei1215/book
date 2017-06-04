@@ -37,8 +37,15 @@
       area_code, address, gmt_create, 
       gmt_modified)
     values (#{userId,jdbcType=INTEGER}, #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
-      #{areaCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP})
+      #{areaCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, now(), now())
+      ON DUPLICATE KEY
+      UPDATE
+      province_code = #{provinceCode,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      gmt_modified = now()
+
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.manage.book.dal.dataobject.AddressInfoDO">
     <!--
@@ -71,5 +78,28 @@
     -->
     select id, user_id, province_code, city_code, area_code, address, gmt_create, gmt_modified
     from address_info
+  </select>
+  
+  
+  
+  
+  
+   <select id="getAddressInfo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, user_id, province_code, city_code, area_code, address, gmt_create, gmt_modified
+    from address_info
+    where 1=1
+     <if test="id !=null ">  
+  		 and id = #{id,jdbcType=INTEGER}
+     </if>
+     <if test="userId !=null ">  
+    and user_id = #{userId,jdbcType=INTEGER}
+    </if>
+     <if test="provinceCode !=null "> and province_code = #{provinceCode,jdbcType=VARCHAR}
+      </if>
+     <if test="cityCode !=null "> 
+    and city_code = #{cityCode,jdbcType=VARCHAR}
+   </if>
+     <if test="areaCode !=null ">  and area_code = #{areaCode,jdbcType=VARCHAR}
+     </if>
   </select>
 </mapper>

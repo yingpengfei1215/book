@@ -7,8 +7,13 @@
   <link rel="stylesheet" href="htdocs/css/style.css">
   <link rel="stylesheet" type="text/css" href="htdocs/css/bootstrap/bootstrap.min.css">
   <script type="text/javascript" src="htdocs/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="htdocs/js/jquery-1.9.1.min.js"></script>
 </head>
     <body ontouchstart="">
+    <form name= "myform" id="user-info-save" action="">
+      <input type="hidden" class="form-control" id="id" name="id"  value="$!userinfo.id">
+      <input type="hidden" class="form-control" id="userAddress" name="userAddress"  value="$!userinfo.userAddress">
+      
         <div class="container">
             <div class="row">
               <div class="col-md-8">
@@ -17,66 +22,133 @@
                           <tbody>
                             <tr>
                               <th><label> 姓名</label></th>
-                              <th><input type="text" class="form-control" id="userName" placeholder="请输入名称"></th>
+                              <th><input type="text" class="form-control" id="userName" name="userName" placeholder="请输入名称"  value="$!userinfo.userName" #if($type=="read") disabled #end></th>
+                             </tr>
+                             <tr>
                               <th><label> 联系电话</label></th>
-                              <th><input type="text" class="form-control" id="phoneNo" placeholder="请输入手机号" value="$userinfo.phoneNo"> </th>
+                              <th><input type="text" class="form-control" id="phoneNo" name="phoneNo" placeholder="请输入手机号" value="$!userinfo.phoneNo" #if($type=="read") disabled #end> </th>
                              </tr>
                              <tr>
                               <th><label> 邮箱地址</label></th>
-                              <th><input type="text" class="form-control" id="userEmail" placeholder="请输入手机号"></th>
-                              <th><label> 性别</label></th>
-                              <th>
-                              	<select class="form-control">
-								  <option value="0">男</option>
-								  <option value="1">女</option>
-								</select>
-								</th>
+                              <th><input type="text" class="form-control" id="userEmail" name="userEmail" placeholder="请输入邮箱地址"  value="$!userinfo.userEmail" #if($type=="read") disabled #end></th>
                              </tr>
+                             <tr>
+                                <th><label> 性别</label></th>
+                                <th>
+                                  <select class="form-control" #if($type=="read") disabled #end id="sex" name="sex">
+                                    <option value="0" #if($!userinfo.sex!=1) selected #end>男</option>
+                                    <option value="1"  #if($!userinfo.sex==1) selected #end>女</option>
+                                  </select>
+                                </th>
+                              </tr>
                               <tr>
                               <th rowspan="2"><label> 快递地址</label></th>
-                              <th  colspan="3">
-                              	<select class="form-control">
-                              	  <option value="0">省</option>
-								  <option value="0">男</option>
-								  <option value="1">女</option>
-								</select>
-                              	<select class="form-control">
-								  <option value="0">市</option>
-								  <option value="1">女</option>
-								</select>
-                              	<select class="form-control">
-								  <option value="0">区</option>
-								  <option value="1">女</option>
-								</select>
+                              <th >
+                              	<select class="form-control" #if($type=="read") disabled #end  id="province_code" name="provinceCode">
+                              	  #foreach($item in $provinces)
+                									<option value="$item.vCode" #if($address.provinceCode==$item.vCode) selected="selected"  #end>$!item.vName</option>
+                								  #end
+                								</select>省
+                                <select class="form-control" #if($type=="read") disabled #end  id="city_code" name="cityCode">
+                                              	  #foreach($item in $cities)
+                									<option value="$item.vCode" #if($address.cityCode==$item.vCode) selected="selected"  #end>$!item.vName</option>
+                								  #end
+                								</select>市
+                                 <select class="form-control" #if($type=="read") disabled #end id="area_code" name="areaCode">
+                                              	  #foreach($item in $areas)
+                									<option value="$item.vCode" #if($address.areaCode==$item.vCode) selected="selected"  #end>$!item.vName</option>
+                								  #end
+                								</select>区
                               </th>
                              </tr>
                              <tr>
                               <th colspan="3">
-                              <input type="text" id="inputHelpBlock" class="form-control" aria-describedby="helpBlock" value="$userinfo.address">
+                              <input type="text" id="address" name="address" class="form-control" aria-describedby="helpBlock" value="$!address.address" #if($type=="read") disabled #end>
                               </th>
                              </tr>
                              <tr>
                               <th><label>兴趣书籍</label></th>
                               <th colspan="3">
-
-                              	<ul>
-                              		<li>小说</li>
-                              		<li>文学</li>
-                              		<li>言情</li>
-                              		<li>惊悚</li>
-                              		<li>科幻</li>	
-                              	</ul>
-
+                               #foreach($member in $preferenceType)
+                                <div class="checkbox">
+                								  <label>
+                								    <input type="checkbox" class="j-preference" value="$member.vCode" name="preferenceType" #if($type=="read") disabled #end #if($member.selected) checked #end>$!member.vName
+                								  </label>
+                								</div>
+                								#end 
                               </th>
                              </tr>
                           </tbody>
                      </table>
-
+					
+    						#if($type=="read") 
+                <button type="button" id="user-edit" class="btn btn-default" >编辑</button>
+    						#elseif($type=="edit" or $type=="add") 
+                <button type="submit" id="user-save" class="btn btn-default">保存</button>
+    						#end
+					
               </div>
             </div>
 
         </div>
+        </form>
     </body>
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        //编辑
+        $("#user-edit").on("click",function(data){
+            location.href = "userInfo.htm?type=edit&id=$!userinfo.id";
+        });
+
+        // 点击保存
+       $("#user-save").on("click",function(data){
+
+         var form = $("form").serialize();
+         console.info(form);
+         $("#j-preference");
+         //form.preferences="1,2";
+
+         jQuery.ajax({  
+                  url:"save_userinfo2.json",  
+                  type:"post",  
+                  dataType:"json",     
+                  data:form,  
+                  success:function(result){  
+                    //result是服务器返回的json结果  
+                    if(result.status){  
+                       alert(result.success);
+                    }else {  
+                       alert(result.success);  
+                    }  
+                    location.href="http://localhost:8080/userInfo.htm?type=read&id=$!userinfo.id"
+                  },  
+                  error:function(){  
+                      alert("发生异常，请重试！");  
+                  }  
+               });  
+
+        });
+
+        $("#province_code").on("change", function() {
+                if($('#city_code')){
+                    $('#city_code').load("area_findCity.htm?province_code=" + $('#province_code').val());
+                }
+                if($('#area_code')){
+                    $('#area_code').load("area_findDistrict.htm?province_code=" + $('#province_code').val());
+                }
+          });
+
+        $("#city_code").on("change", function(){
+        	if($('#area_code')){
+        		$('#area_code').load("area_findDistrict.htm?city_code=" + $('#city_code').val());
+          }
+        })
+
+    })
+
+
+    </script>
 </html>
 
 $userinfo.id</br>

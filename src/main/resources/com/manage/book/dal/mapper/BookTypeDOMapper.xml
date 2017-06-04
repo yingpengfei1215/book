@@ -67,4 +67,25 @@
     select v_code, v_name, n_level, v_upcode, isdelete, gmt_modified, gmt_create
     from book_type
   </select>
+
+  <select id="getBookType" resultMap="BaseResultMap">
+    select v_code, v_name, n_level, v_upcode, isdelete, gmt_modified, gmt_create
+    from book_type
+    where 1=1
+    <if test="vCode !=null ">
+      and v_code = #{vCode,jdbcType=VARCHAR}
+    </if>
+    <if test="vUpcode !=null ">
+      and v_upcode = #{vUpcode,jdbcType=VARCHAR}
+    </if>
+    <if test="vName !=null ">
+      and v_name = #{vName,jdbcType=VARCHAR}
+    </if>
+    <if test="nLevel !=null ">
+      and n_level = #{nLevel,jdbcType=VARCHAR}
+    </if>
+    <if test="vUpcode !=null ">
+      and v_upcode = #{vUpcode,jdbcType=VARCHAR}
+    </if>
+  </select>
 </mapper>

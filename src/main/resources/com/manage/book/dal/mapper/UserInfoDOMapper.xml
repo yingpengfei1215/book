@@ -36,12 +36,22 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into user_info (openid, phone_no, sex, 
-      user_address, preference_type, gmt_modified, 
+      user_address, preference_type, gmt_modified, gmt_create,
        user_name, user_email
       )
     values (#{openid,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
-      #{userAddress,jdbcType=INTEGER}, #{preferenceType,jdbcType=VARCHAR}, now(), #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}
+      #{userAddress,jdbcType=INTEGER}, #{preferenceType,jdbcType=VARCHAR}, now(),  now(), #{userName,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}
       )
+    ON DUPLICATE KEY
+    UPDATE
+    phone_no = #{phoneNo,jdbcType=VARCHAR},
+    sex = #{sex,jdbcType=VARCHAR},
+    user_address = #{userAddress,jdbcType=INTEGER},
+    preference_type = #{preferenceType,jdbcType=VARCHAR},
+    gmt_modified =  now(),
+    user_name = #{userName,jdbcType=VARCHAR},
+    user_email = #{userEmail,jdbcType=VARCHAR}
+
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.manage.book.dal.dataobject.UserInfoDO">
     <!--
@@ -55,7 +65,6 @@
       user_address = #{userAddress,jdbcType=INTEGER},
       preference_type = #{preferenceType,jdbcType=VARCHAR},
       gmt_modified =  now(),
-      gmt_create =  now(),
       user_name = #{userName,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

@@ -13,6 +13,7 @@
     <import resource="classpath*:spring/dal/*-bean.xml"/>
 
     <bean id="InitBookInfoService" class="com.manage.book.core.book.InitBookInfoServiceImpl"/>
+    <bean id="UserInfoService" class="com.manage.book.core.book.UserInfoServiceImpl"/>
 
 
 </beans>
