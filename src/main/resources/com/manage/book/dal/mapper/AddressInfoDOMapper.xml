@@ -42,8 +42,8 @@
       gmt_modified)
     values (#{userId,jdbcType=INTEGER}, #{provinceCode,jdbcType=VARCHAR}, #{cityCode,jdbcType=VARCHAR}, 
       #{areaCode,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER}, 
-      #{acceptPhone,jdbcType=VARCHAR}, #{acceptName,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
-      #{gmtModified,jdbcType=TIMESTAMP})
+      #{acceptPhone,jdbcType=VARCHAR}, #{acceptName,jdbcType=VARCHAR}, now(),
+      now())
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.manage.book.dal.dataobject.AddressInfoDO">
     <!--
